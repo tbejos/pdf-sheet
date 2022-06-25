@@ -245,7 +245,42 @@
     { "pdf": "SPShield", "foundry": "" },
     { "pdf": "PENALTYShield", "foundry": @items.filter(item => item.type === "armor" && item.data.equipped === "equipped" && item.data.isShield)[0]?.data?.penalty ?? 'Failed' },
 
-    /* // TODO: Weapons */
+    /* Weapons */
+    { "pdf": "WEAPONRow1", "foundry": "" },
+    { "pdf": "DMGRow1", "foundry": "" },
+    { "pdf": "AMMORow1", "foundry": "" },
+    { "pdf": "ROFRow1", "foundry": "" },
+    { "pdf": "NOTESRow1", "foundry": "" },
+
+    { "pdf": "WEAPONRow2", "foundry": "" },
+    { "pdf": "DMGRow2", "foundry": "" },
+    { "pdf": "AMMORow2", "foundry": "" },
+    { "pdf": "ROFRow2", "foundry": "" },
+    { "pdf": "NOTESRow2", "foundry": "" },
+
+    { "pdf": "WEAPONRow3", "foundry": "" },
+    { "pdf": "DMGRow3", "foundry": "" },
+    { "pdf": "AMMORow3", "foundry": "" },
+    { "pdf": "ROFRow3", "foundry": "" },
+    { "pdf": "NOTESRow3", "foundry": "" },
+
+    { "pdf": "WEAPONRow4", "foundry": "" },
+    { "pdf": "DMGRow4", "foundry": "" },
+    { "pdf": "AMMORow4", "foundry": "" },
+    { "pdf": "ROFRow4", "foundry": "" },
+    { "pdf": "NOTESRow4", "foundry": "" },
+
+    { "pdf": "WEAPONRow5", "foundry": "" },
+    { "pdf": "DMGRow5", "foundry": "" },
+    { "pdf": "AMMORow5", "foundry": "" },
+    { "pdf": "ROFRow5", "foundry": "" },
+    { "pdf": "NOTESRow5", "foundry": "" },
+
+    { "pdf": "WEAPONRow6", "foundry": "" },
+    { "pdf": "DMGRow6", "foundry": "" },
+    { "pdf": "AMMORow6", "foundry": "" },
+    { "pdf": "ROFRow6", "foundry": "" },
+    { "pdf": "NOTESRow6", "foundry": "" },
 
     /***************************************************************************
      * Page 2 *
@@ -278,6 +313,43 @@
     { "pdf": "Love Affair 3", "foundry": "" },
 
     /* Gear */
+    { "pdf": "Gear 1", "foundry": "" },
+    { "pdf": "Gear Notes 1", "foundry": "" },
+    { "pdf": "Gear 2", "foundry": "" },
+    { "pdf": "Gear Notes 2", "foundry": "" },
+    { "pdf": "Gear 3", "foundry": "" },
+    { "pdf": "Gear Notes 3", "foundry": "" },
+    { "pdf": "Gear 4", "foundry": "" },
+    { "pdf": "Gear Notes 4", "foundry": "" },
+    { "pdf": "Gear 5", "foundry": "" },
+    { "pdf": "Gear Notes 5", "foundry": "" },
+    { "pdf": "Gear 6", "foundry": "" },
+    { "pdf": "Gear Notes 6", "foundry": "" },
+    { "pdf": "Gear 7", "foundry": "" },
+    { "pdf": "Gear Notes 7", "foundry": "" },
+    { "pdf": "Gear 8", "foundry": "" },
+    { "pdf": "Gear Notes 8", "foundry": "" },
+    { "pdf": "Gear 9", "foundry": "" },
+    { "pdf": "Gear Notes 9", "foundry": "" },
+    { "pdf": "Gear 10", "foundry": "" },
+    { "pdf": "Gear Notes 10", "foundry": "" },
+    { "pdf": "Gear 11", "foundry": "" },
+    { "pdf": "Gear Notes 11", "foundry": "" },
+    { "pdf": "Gear 12", "foundry": "" },
+    { "pdf": "Gear Notes 12", "foundry": "" },
+    { "pdf": "Gear 13", "foundry": "" },
+    { "pdf": "Gear Notes 13", "foundry": "" },
+    { "pdf": "Gear 14", "foundry": "" },
+    { "pdf": "Gear Notes 14", "foundry": "" },
+    { "pdf": "Gear 15", "foundry": "" },
+    { "pdf": "Gear Notes 15", "foundry": "" },
+    { "pdf": "Gear 16", "foundry": "" },
+    { "pdf": "Gear Notes 16", "foundry": "" },
+    { "pdf": "Gear 17", "foundry": "" },
+    { "pdf": "Gear Notes 17", "foundry": "" },
+    { "pdf": "Gear 18", "foundry": "" },
+    { "pdf": "Gear Notes 18", "foundry": "" },
+    { "pdf": "Ammo", "foundry": "" },
     { "pdf": "Cash", "foundry": @data.wealth.value },
 
     /* Lifestyle */
