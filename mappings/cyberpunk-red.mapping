@@ -13,7 +13,7 @@
     { "pdf": "Current HP", "foundry": @data.derivedStats.hp.value },
     { "pdf": "Max HP", "foundry": @data.derivedStats.hp.max },
     { "pdf": "Seriously Wounded Threshhold", "foundry": @data.derivedStats.seriouslyWounded },
-    { "pdf": "Death Save", "foundry": "" }, /* @data.derivedStats.deathSave.? */
+    { "pdf": "Death Save", "foundry": @data.derivedStats.deathSave.value },
     { "pdf": "Critical Injuries", "foundry": @items.filter(item => item.type === "criticalInjury").map(crit => `${crit.name}`).join("\n") ?? '' },
 
     /* Stats */
@@ -240,7 +240,7 @@
 
     /* Armor */
     { "pdf": "Head Armor", "foundry": @items.filter(item => item.type === "armor" && item.data.data.equipped === "equipped" && item.data.data.isHeadLocation)[0]?.name ?? '' },
-    { "pdf": "SPHead", "foundry": @items.filter(item => item.type === "armor" && item.data.data.equipped === "equipped" && item.data.data.isHeadLocation).map(headArmor => headArmor.data.data.headLocation.sp - headArmor.data.data.headLocation.ablation) ?? '' },
+    { "pdf": "SPHead", "foundry": (@items.filter(item => item.type === "armor" && item.data.data.equipped === "equipped" && item.data.data.isHeadLocation)[0]?.data?.data?.headLocation?.sp ?? '') - (@items.filter(item => item.type === "armor" && item.data.data.equipped === "equipped" && item.data.data.isHeadLocation)[0]?.data?.data?.headLocation?.ablation ?? '') },
     { "pdf": "PENALTYHead", "foundry": @items.filter(item => item.type === "armor" && item.data.data.equipped === "equipped" && item.data.data.isHeadLocation)[0]?.data?.data?.penalty ?? '' },
 
     { "pdf": "Body Armor", "foundry": @items.filter(item => item.type === "armor" && item.data.data.equipped === "equipped" && item.data.data.isBodyLocation)[0]?.name ?? '' },
@@ -256,37 +256,37 @@
     { "pdf": "DMGRow1", "foundry": @items.filter(item => item.type === "weapon")[0]?.data?.data?.damage ?? '' },
     { "pdf": "AMMORow1", "foundry": @items.filter(item => item.type === "weapon")[0]?.data?.data?.magazine?.max ?? '' },
     { "pdf": "ROFRow1", "foundry": @items.filter(item => item.type === "weapon")[0]?.data?.data?.rof ?? '' },
-    { "pdf": "NOTESRow1", "foundry": "" },
+    { "pdf": "NOTESRow1", "foundry": @items.filter(item => item.type === "weapon")[0]?.data?.data?.description?.value.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
 
     { "pdf": "WEAPONRow2", "foundry": @items.filter(item => item.type === "weapon")[1]?.name ?? '' },
     { "pdf": "DMGRow2", "foundry": @items.filter(item => item.type === "weapon")[1]?.data?.data?.damage ?? '' },
     { "pdf": "AMMORow2", "foundry": @items.filter(item => item.type === "weapon")[1]?.data?.data?.magazine?.max ?? '' },
     { "pdf": "ROFRow2", "foundry": @items.filter(item => item.type === "weapon")[1]?.data?.data?.rof ?? '' },
-    { "pdf": "NOTESRow2", "foundry": "" },
+    { "pdf": "NOTESRow2", "foundry": @items.filter(item => item.type === "weapon")[1]?.data?.data?.description?.value.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
 
     { "pdf": "WEAPONRow3", "foundry": @items.filter(item => item.type === "weapon")[2]?.name ?? '' },
     { "pdf": "DMGRow3", "foundry": @items.filter(item => item.type === "weapon")[2]?.data?.data?.damage ?? '' },
     { "pdf": "AMMORow3", "foundry": @items.filter(item => item.type === "weapon")[2]?.data?.data?.magazine?.max ?? '' },
     { "pdf": "ROFRow3", "foundry": @items.filter(item => item.type === "weapon")[2]?.data?.data?.rof ?? '' },
-    { "pdf": "NOTESRow3", "foundry": "" },
+    { "pdf": "NOTESRow3", "foundry": @items.filter(item => item.type === "weapon")[2]?.data?.data?.description?.value.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
 
     { "pdf": "WEAPONRow4", "foundry": @items.filter(item => item.type === "weapon")[3]?.name ?? '' },
     { "pdf": "DMGRow4", "foundry": @items.filter(item => item.type === "weapon")[3]?.data?.data?.damage ?? '' },
     { "pdf": "AMMORow4", "foundry": @items.filter(item => item.type === "weapon")[3]?.data?.data?.magazine?.max ?? '' },
     { "pdf": "ROFRow4", "foundry": @items.filter(item => item.type === "weapon")[3]?.data?.data?.rof ?? '' },
-    { "pdf": "NOTESRow4", "foundry": "" },
+    { "pdf": "NOTESRow4", "foundry": @items.filter(item => item.type === "weapon")[3]?.data?.data?.description?.value.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
 
     { "pdf": "WEAPONRow5", "foundry": @items.filter(item => item.type === "weapon")[4]?.name ?? '' },
     { "pdf": "DMGRow5", "foundry": @items.filter(item => item.type === "weapon")[4]?.data?.data?.damage ?? '' },
     { "pdf": "AMMORow5", "foundry": @items.filter(item => item.type === "weapon")[4]?.data?.data?.magazine?.max ?? '' },
     { "pdf": "ROFRow5", "foundry": @items.filter(item => item.type === "weapon")[4]?.data?.data?.rof ?? '' },
-    { "pdf": "NOTESRow5", "foundry": "" },
+    { "pdf": "NOTESRow5", "foundry": @items.filter(item => item.type === "weapon")[4]?.data?.data?.description?.value.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
 
     { "pdf": "WEAPONRow6", "foundry": @items.filter(item => item.type === "weapon")[5]?.name ?? '' },
     { "pdf": "DMGRow6", "foundry": @items.filter(item => item.type === "weapon")[5]?.data?.data?.damage ?? '' },
     { "pdf": "AMMORow6", "foundry": @items.filter(item => item.type === "weapon")[5]?.data?.data?.magazine?.max ?? '' },
     { "pdf": "ROFRow6", "foundry": @items.filter(item => item.type === "weapon")[5]?.data?.data?.rof ?? '' },
-    { "pdf": "NOTESRow6", "foundry": "" },
+    { "pdf": "NOTESRow6", "foundry": @items.filter(item => item.type === "weapon")[5]?.data?.data?.description?.value.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
 
     /***************************************************************************
      * Page 2 *
@@ -294,7 +294,7 @@
     { "pdf": "Aliases", "foundry": @data.information.alias },
     { "pdf": "Current IP", "foundry": @data.improvementPoints.value },
     { "pdf": "Reputation", "foundry": @data.reputation.value },
-    { "pdf": "Reputation Events", "foundry": "" },
+    { "pdf": "Reputation Events", "foundry": @data.reputation.transactions.map(event => event[1]?.split(" - ")[0])?.join("\n") ?? ''},
 
     /* Lifepath */
     { "pdf": "Cultural Origins", "foundry": @data.lifepath.culturalOrigin },
@@ -310,59 +310,49 @@
     { "pdf": "Family Crisis", "foundry":  @data.lifepath.familyCrisis },
     { "pdf": "Life Goals", "foundry":  @data.lifepath.lifeGoals },
 
-    { "pdf": "Friend 1", "foundry": "" },
-    { "pdf": "Friend 2", "foundry": "" },
-    { "pdf": "Friend 3", "foundry": "" },
-
-    { "pdf": "Love Affair 1", "foundry": "" },
-    { "pdf": "Love Affair 2", "foundry": "" },
-    { "pdf": "Love Affair 3", "foundry": "" },
-
     /* Gear */
-    { "pdf": "Gear 1", "foundry": "" },
-    { "pdf": "Gear Notes 1", "foundry": "" },
-    { "pdf": "Gear 2", "foundry": "" },
-    { "pdf": "Gear Notes 2", "foundry": "" },
-    { "pdf": "Gear 3", "foundry": "" },
-    { "pdf": "Gear Notes 3", "foundry": "" },
-    { "pdf": "Gear 4", "foundry": "" },
-    { "pdf": "Gear Notes 4", "foundry": "" },
-    { "pdf": "Gear 5", "foundry": "" },
-    { "pdf": "Gear Notes 5", "foundry": "" },
-    { "pdf": "Gear 6", "foundry": "" },
-    { "pdf": "Gear Notes 6", "foundry": "" },
-    { "pdf": "Gear 7", "foundry": "" },
-    { "pdf": "Gear Notes 7", "foundry": "" },
-    { "pdf": "Gear 8", "foundry": "" },
-    { "pdf": "Gear Notes 8", "foundry": "" },
-    { "pdf": "Gear 9", "foundry": "" },
-    { "pdf": "Gear Notes 9", "foundry": "" },
-    { "pdf": "Gear 10", "foundry": "" },
-    { "pdf": "Gear Notes 10", "foundry": "" },
-    { "pdf": "Gear 11", "foundry": "" },
-    { "pdf": "Gear Notes 11", "foundry": "" },
-    { "pdf": "Gear 12", "foundry": "" },
-    { "pdf": "Gear Notes 12", "foundry": "" },
-    { "pdf": "Gear 13", "foundry": "" },
-    { "pdf": "Gear Notes 13", "foundry": "" },
-    { "pdf": "Gear 14", "foundry": "" },
-    { "pdf": "Gear Notes 14", "foundry": "" },
-    { "pdf": "Gear 15", "foundry": "" },
-    { "pdf": "Gear Notes 15", "foundry": "" },
-    { "pdf": "Gear 16", "foundry": "" },
-    { "pdf": "Gear Notes 16", "foundry": "" },
-    { "pdf": "Gear 17", "foundry": "" },
-    { "pdf": "Gear Notes 17", "foundry": "" },
-    { "pdf": "Gear 18", "foundry": "" },
-    { "pdf": "Gear Notes 18", "foundry": "" },
-    { "pdf": "Ammo", "foundry": "" },
+    /* @items.filter(item => ["cyberdeck", "program", "gear", "vehicle", "upgrade"].includes(item.type))[0]?.name ?? '' */
+    { "pdf": "Gear 1", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[0]?.name ?? '' },
+    { "pdf": "Gear Notes 1", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[0]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 2", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[1]?.name ?? '' },
+    { "pdf": "Gear Notes 2", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[1]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 3", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[2]?.name ?? '' },
+    { "pdf": "Gear Notes 3", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[2]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 4", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[3]?.name ?? '' },
+    { "pdf": "Gear Notes 4", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[3]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 5", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[4]?.name ?? '' },
+    { "pdf": "Gear Notes 5", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[4]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 6", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[5]?.name ?? '' },
+    { "pdf": "Gear Notes 6", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[5]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 7", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[6]?.name ?? '' },
+    { "pdf": "Gear Notes 7", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[6]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 8", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[7]?.name ?? '' },
+    { "pdf": "Gear Notes 8", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[7]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 9", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[8]?.name ?? '' },
+    { "pdf": "Gear Notes 9", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[8]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 10", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[9]?.name ?? '' },
+    { "pdf": "Gear Notes 10", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[9]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 11", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[10]?.name ?? '' },
+    { "pdf": "Gear Notes 11", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[10]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 12", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[11]?.name ?? '' },
+    { "pdf": "Gear Notes 12", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[11]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 13", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[12]?.name ?? '' },
+    { "pdf": "Gear Notes 13", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[12]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 14", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[13]?.name ?? '' },
+    { "pdf": "Gear Notes 14", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[13]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 15", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[14]?.name ?? '' },
+    { "pdf": "Gear Notes 15", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[14]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 16", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[15]?.name ?? '' },
+    { "pdf": "Gear Notes 16", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[15]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 17", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[16]?.name ?? '' },
+    { "pdf": "Gear Notes 17", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[16]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Gear 18", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[17]?.name ?? '' },
+    { "pdf": "Gear Notes 18", "foundry": @items.filter(item => ["cyberdeck", "gear", "vehicle", "upgrade", "drug"].includes(item.type) || (["armor", "cyberware"].includes(item.type) && !(item.data.data.isInstalled || item.data.data.equipped === "equipped")))[17]?.data?.data?.description?.value?.replace(/<\/?[^>]+(>|$)/g, "") ?? '' },
+    { "pdf": "Ammo", "foundry": @items.filter(item => item.type === "ammo").map(ammo => ammo.name + " " + ammo.data?.data?.amount + "x")?.join(", ") ?? '' },
     { "pdf": "Cash", "foundry": @data.wealth.value },
 
     /* Lifestyle */
-    { "pdf": "FASHION", "foundry": @data.lifestyle.fashion.description },
-    { "pdf": "Housing", "foundry": @data.lifestyle.housing.description },
-    { "pdf": "Rent", "foundry": @data.lifestyle.housing.cost },
-    { "pdf": "Lifestyle", "foundry": @data.lifestyle.lifestyle.description },
+    { "pdf": "FASHION", "foundry": @items.filter(item => item.type === "clothing").map(clothing => clothing.name + " " + clothing.data.data.amount)?.join("\n") ?? ''},
 
     /***************************************************************************
      * Page 3 *
@@ -501,7 +491,7 @@
     { "pdf": "BorgD7", "foundry": "" },
 
     /***************************************************************************
-     * Unimplemented (Not currently in Cyberpunk RED Core foundry) *
+     * Unimplemented *
      **************************************************************************/
     /* Page 1 */
     { "pdf": "Character Image", "foundry": "" }, /* Images not supported */
@@ -542,6 +532,15 @@
     /* Page 2 */
     { "pdf": "Total IP", "foundry": "" },
 
+    /* Friend + Lovers */
+    { "pdf": "Friend 1", "foundry": "" },
+    { "pdf": "Friend 2", "foundry": "" },
+    { "pdf": "Friend 3", "foundry": "" },
+
+    { "pdf": "Love Affair 1", "foundry": "" },
+    { "pdf": "Love Affair 2", "foundry": "" },
+    { "pdf": "Love Affair 3", "foundry": "" },
+
     /* Enemies */
     { "pdf": "Who 1", "foundry": "" },
     { "pdf": "What Caused It", "foundry": "" },
@@ -557,6 +556,11 @@
     { "pdf": "What Caused It 3", "foundry": "" },
     { "pdf": "Throw At You 3", "foundry": "" },
     { "pdf": "Happen 3", "foundry": "" },
+
+    /* Lifestyle */
+    { "pdf": "Housing", "foundry": "" },
+    { "pdf": "Rent", "foundry": "" },
+    { "pdf": "Lifestyle", "foundry": ""},
 
     { "pdf": "ROLE SPECIFIC LIFEPATH", "foundry": "" },
 
