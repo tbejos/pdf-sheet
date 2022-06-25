@@ -3,7 +3,6 @@
     /***************************************************************************
      * Page 1 *
      **************************************************************************/
-    { "pdf": "Character Image", "foundry": "" }, /* Images not supported */
     { "pdf": "Handle", "foundry": @name },
     { "pdf": "Role", "foundry": @data.roleInfo.activeRole },
     { "pdf": "Role Ability", "foundry": "" },
@@ -32,15 +31,206 @@
     { "pdf": "EMP MAX", "foundry": @data.stats.emp.max },
 
     /* Skills // TODO: Fix these */
+    /* Awareness Skills */
     { "pdf": "Concentration Level" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Concentration")[0]?.data?.level ?? 'Failed' },
     { "pdf": "Concentration Total" , "foundry": ""},
 
-    { "pdf": "Conceal/Reveal LVL" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Conceal/Reveal Object")[0]?.data?.level ?? 'Failed'},
+    { "pdf": "Conceal/Reveal LVL" , "foundry": ""},
     { "pdf": "Conceal/Reveal Total" , "foundry": ""},
 
-    { "pdf": "LVLLip Reading INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Lip Reading")[0]?.data?.level ?? 'Failed'},
+    { "pdf": "LVLLip Reading INT" , "foundry": ""},
     { "pdf": "Lip Reading Total" , "foundry": ""},
 
+    { "pdf": "LVLPerception INT" , "foundry": ""},
+    { "pdf": "Perception Total" , "foundry": ""},
+
+    { "pdf": "LVLTracking INT" , "foundry": ""},
+    { "pdf": "Tracking Total" , "foundry": ""},
+
+    /* Body Skills */
+    { "pdf": "LVLAthletics DEX" , "foundry": ""},
+    { "pdf": "Athletics Total" , "foundry": ""},
+
+    { "pdf": "LVLContortionist DEX" , "foundry": ""},
+    { "pdf": "Contortionist Total" , "foundry": ""},
+
+    { "pdf": "LVLDance DEX" , "foundry": ""},
+    { "pdf": "Dance Total" , "foundry": ""},
+
+    { "pdf": "LVLEndurance WILL" , "foundry": ""},
+    { "pdf": "Endurance Total" , "foundry": ""},
+
+    { "pdf": "LVLResist TortureDrugs WILL" , "foundry": ""},
+    { "pdf": "Resist Total" , "foundry": ""},
+
+    { "pdf": "LVLStealth DEX" , "foundry": ""},
+    { "pdf": "Stealth Total" , "foundry": ""},
+
+    /* Control Skills */
+    { "pdf": "LVLDrive Land Vehicle REF" , "foundry": ""},
+    { "pdf": "Drive Land Total" , "foundry": ""},
+
+    { "pdf": "LVLPilor Air Vehicle x2 REF" , "foundry": ""},
+    { "pdf": "Pilot Air Total" , "foundry": ""},
+
+    { "pdf": "LVLPilot Sea Vehicle REF" , "foundry": ""},
+    { "pdf": "" , "foundry": ""},
+
+    { "pdf": "LVLRiding REF" , "foundry": ""},
+    { "pdf": "" , "foundry": ""},
+
+    /* Education Skills */
+    { "pdf": "LVLAccounting INT" , "foundry": ""},
+    { "pdf": "Accounting Total" , "foundry": ""},
+
+    { "pdf": "LVLAnimal Handling INT" , "foundry": ""},
+    { "pdf": "Animal Handling Total" , "foundry": ""},
+
+    { "pdf": "LVLBureaucracy INT" , "foundry": ""},
+    { "pdf": "Bureaucracy Total" , "foundry": ""},
+
+    { "pdf": "LVLBusiness INT" , "foundry": ""},
+    { "pdf": "Business Total" , "foundry": ""},
+
+    { "pdf": "LVLComposition INT" , "foundry": ""},
+    { "pdf": "Composition Total" , "foundry": ""},
+
+    { "pdf": "LVLCriminology INT" , "foundry": ""},
+    { "pdf": "Criminology Total" , "foundry": ""},
+
+    { "pdf": "LVLCryptography INT" , "foundry": ""},
+    { "pdf": "Cryptography Total" , "foundry": ""},
+
+    { "pdf": "LVLDeduction INT" , "foundry": ""},
+    { "pdf": "Deduction Total" , "foundry": ""},
+
+    { "pdf": "LVLEducation INT" , "foundry": ""},
+    { "pdf": "Education Total" , "foundry": ""},
+
+    { "pdf": "Gamble" , "foundry": ""},
+    { "pdf": "Gamble Total" , "foundry": ""},
+
+    { "pdf": "LVLStreetslang" , "foundry": ""},
+    { "pdf": "Lang Street Slang Total" , "foundry": ""},
+
+    { "pdf": "LVLLibrary Search INT" , "foundry": ""},
+    { "pdf": "Library Search Total" , "foundry": ""},
+
+    { "pdf": "LVLYour Home" , "foundry": ""},
+    { "pdf": "Local Expert 1 Total" , "foundry": ""},
+
+    { "pdf": "LVLTactics INT" , "foundry": ""},
+    { "pdf": "Tactics Total" , "foundry": ""},
+
+    { "pdf": "LVLWilderness Survival INT" , "foundry": ""},
+    { "pdf": "Wilderness Survival Total" , "foundry": ""},
+
+    /* Fighting Skills */
+    { "pdf": "LVLBrawling DEX" , "foundry": ""},
+    { "pdf": "Brawling Total" , "foundry": ""},
+
+    { "pdf": "LVLEvasion DEX" , "foundry": ""},
+    { "pdf": "Evasion Total" , "foundry": ""},
+
+    { "pdf": "LVLMartial Arts x2 DEX" , "foundry": ""},
+    { "pdf": "Martial Arts Total" , "foundry": ""},
+
+    { "pdf": "LVLMelee Weapon DEX" , "foundry": ""},
+    { "pdf": "Melee Weapon Total" , "foundry": ""},
+
+    /* Performance Skills */
+    { "pdf": "LVLActing COOL" , "foundry": ""},
+    { "pdf": "Acting Total" , "foundry": ""},
+
+    /* Ranged Weapons Skills */
+    { "pdf": "LVLArchery REF" , "foundry": ""},
+    { "pdf": "Archery Total" , "foundry": ""},
+
+    { "pdf": "LVLAutofire x2 REF" , "foundry": ""},
+    { "pdf": "Autofire Total" , "foundry": ""},
+
+    { "pdf": "Handgun" , "foundry": ""},
+    { "pdf": "Handgun Total" , "foundry": ""},
+
+    { "pdf": "LVLHeavy Weapons x2 REF" , "foundry": ""},
+    { "pdf": "HW Total" , "foundry": ""},
+
+    { "pdf": "LVLShoulder Arms REF" , "foundry": ""},
+    { "pdf": "Shoulder Arms Total" , "foundry": ""},
+
+    /* Social Skills */
+    { "pdf": "LVLBribery COOL" , "foundry": ""},
+    { "pdf": "Bribery Total" , "foundry": ""},
+
+    { "pdf": "LVLConversation EMP" , "foundry": ""},
+    { "pdf": "Conversation Total" , "foundry": ""},
+
+    { "pdf": "LVLHuman Perception EMP" , "foundry": ""},
+    { "pdf": "Human Perception Total" , "foundry": ""},
+
+    { "pdf": "LVLInterrogation COOL" , "foundry": ""},
+    { "pdf": "Interrogation Total" , "foundry": ""},
+
+    { "pdf": "LVLPersuasion COOL" , "foundry": ""},
+    { "pdf": "Persuasion Total" , "foundry": ""},
+
+    { "pdf": "LVLPersonal Grooming COOL" , "foundry": ""},
+    { "pdf": "Personal Grooming Total" , "foundry": ""},
+
+    { "pdf": "LVLStreetwise COOL" , "foundry": ""},
+    { "pdf": "Streetwise Total" , "foundry": ""},
+
+    { "pdf": "LVLTrading COOL" , "foundry": ""},
+    { "pdf": "Trading Total" , "foundry": ""},
+
+    { "pdf": "LVLWardrobe  Style COOL" , "foundry": ""},
+    { "pdf": "W&S Total" , "foundry": ""},
+
+    /* Technique Skills */
+    { "pdf": "LVLAir Vehicle Tech TECH" , "foundry": ""},
+    { "pdf": "Air V Tech Total" , "foundry": ""},
+
+    { "pdf": "LVLBasic Tech TECH" , "foundry": ""},
+    { "pdf": "Basic Tech Total" , "foundry": ""},
+
+    { "pdf": "LVLCybertech TECH" , "foundry": ""},
+    { "pdf": "Cybertech Total" , "foundry": ""},
+
+    { "pdf": "LVLDemolitions x2 TECH" , "foundry": ""},
+    { "pdf": "Demolitions Total" , "foundry": ""},
+
+    { "pdf": "LVLElectronicsSecurity Tech x2 TECH" , "foundry": ""},
+    { "pdf": "E/S Total" , "foundry": ""},
+
+    { "pdf": "LVLFirst Aid TECH" , "foundry": ""},
+    { "pdf": "First Aid Total" , "foundry": ""},
+
+    { "pdf": "LVLForgery TECH" , "foundry": ""},
+    { "pdf": "Forgery Total" , "foundry": ""},
+
+    { "pdf": "LVLLand Vehicle Tech TECH" , "foundry": ""},
+    { "pdf": "Land Vehicle Tech Total" , "foundry": ""},
+
+    { "pdf": "LVLPaintDrawSculpt TECH" , "foundry": ""},
+    { "pdf": "P/D/S Total" , "foundry": ""},
+
+    { "pdf": "LVLParamedic x2 TECH" , "foundry": ""},
+    { "pdf": "Paramedic Total" , "foundry": ""},
+
+    { "pdf": "LVLPhotographyFilm TECH" , "foundry": ""},
+    { "pdf": "Photograph/Film Total" , "foundry": ""},
+
+    { "pdf": "LVLPick Lock TECH" , "foundry": ""},
+    { "pdf": "Pick Lock Total" , "foundry": ""},
+
+    { "pdf": "LVLPick Pocket TECH" , "foundry": ""},
+    { "pdf": "Pick Pocket Total" , "foundry": ""},
+
+    { "pdf": "LVLSea Vehicle Tech TECH" , "foundry": ""},
+    { "pdf": "Sea Vehicle Tech Total" , "foundry": ""},
+
+    { "pdf": "Weaponstech" , "foundry": ""},
+    { "pdf": "Weaponstech Total" , "foundry": ""},
 
     /* Armor */
     { "pdf": "Head Armor", "foundry": @items.filter(item => item.type === "armor" && item.data.equipped === "equipped" && item.data.isHeadLocation)[0]?.name ?? 'Failed' },
@@ -99,13 +289,32 @@
     /***************************************************************************
      * Page 3 *
      **************************************************************************/
-    { "pdf": "Audio Box", "foundry": @items.filter(item => item.type === "cyberware" && item.name === "Cyberaudio Suite")[0]?.data?.isInstalled ? 1 : 0},
-    { "pdf": "Link Box", "foundry": @items.filter(item => item.type === "cyberware" && item.name === "Neural Link")[0]?.data?.isInstalled ? 1 : 0},
+    /* // TODO: Use optionalIds[] to get sub cyberware */
+    { "pdf": "Audio Box", "foundry": @items.filter(item => item.type === "cyberware" && item.data.isInstalled && item.name === "Cyberaudio Suite")[0] ? 1 : 0},
+    { "pdf": "Audio 1", "foundry": "" },
+    { "pdf": "A Data 1", "foundry": "" },
+    { "pdf": "Audio 2", "foundry": "" },
+    { "pdf": "A Data 2", "foundry": "" },
+    { "pdf": "Audio 3", "foundry": "" },
+    { "pdf": "A Data 3", "foundry": "" },
+
+    { "pdf": "Link Box", "foundry": @items.filter(item => item.type === "cyberware" && item.data.isInstalled && item.name === "Neural Link")[0] ? 1 : 0},
+    { "pdf": "NLink 1", "foundry": "" },
+    { "pdf": "NLink Data 1", "foundry": "" },
+    { "pdf": "NLink 2", "foundry": "" },
+    { "pdf": "NLink Data 2", "foundry": "" },
+    { "pdf": "NLink 3", "foundry": "" },
+    { "pdf": "NLink Data 3", "foundry": "" },
+    { "pdf": "NLink 4", "foundry": "" },
+    { "pdf": "NLink Data 4", "foundry": "" },
+    { "pdf": "NLink 5", "foundry": "" },
+    { "pdf": "NLink Data 5", "foundry": "" },
 
     /***************************************************************************
      * Unimplemented (Not currently in Cyberpunk RED Core foundry) *
      **************************************************************************/
     /* Page 1 */
+    { "pdf": "Character Image", "foundry": "" }, /* Images not supported */
     { "pdf": "ADDICTIONS", "foundry": "" },
 
     /* Language Subskill */
