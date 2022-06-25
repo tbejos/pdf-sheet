@@ -1,0 +1,171 @@
+/* PDF https://rtalsoriangames.com/wp-content/uploads/2020/11/RTG-CPR-CharacterSheet-Fillable.pdf */
+[
+    /***************************************************************************
+     * Page 1 *
+     **************************************************************************/
+    { "pdf": "Character Image", "foundry": "" }, /* Images not supported */
+    { "pdf": "Handle", "foundry": @name },
+    { "pdf": "Role", "foundry": @data.roleInfo.activeRole },
+    { "pdf": "Role Ability", "foundry": "" },
+    { "pdf": "Role Ability Rank", "foundry": "" },
+    { "pdf": "Notes", "foundry": @data.information.notes?.replace(/<\/?[^>]+(>|$)/g, "") }, /* Remove HTML tags from notes */
+    { "pdf": "Current Humanity", "foundry": @data.derivedStats.humanity.value },
+    { "pdf": "Max Humanity", "foundry": @data.derivedStats.humanity.max },
+    { "pdf": "Current HP", "foundry": @data.derivedStats.hp.value },
+    { "pdf": "Max HP", "foundry": @data.derivedStats.hp.max },
+    { "pdf": "Seriously Wounded Threshhold", "foundry": @data.derivedStats.seriouslyWounded },
+    { "pdf": "Death Save", "foundry": "" },
+    { "pdf": "Critical Injuries", "foundry": "" },
+
+    /* Stats */
+    { "pdf": "INT", "foundry": @data.stats.int.value },
+    { "pdf": "REF", "foundry": @data.stats.ref.value },
+    { "pdf": "DEX", "foundry": @data.stats.dex.value },
+    { "pdf": "TECH", "foundry": @data.stats.tech.value },
+    { "pdf": "COOL", "foundry": @data.stats.cool.value },
+    { "pdf": "WILL", "foundry": @data.stats.will.value },
+    { "pdf": "LUCK CURRENT", "foundry": @data.stats.luck.value },
+    { "pdf": "LUCK MAX", "foundry": @data.stats.luck.max },
+    { "pdf": "MOVE", "foundry": @data.stats.move.value },
+    { "pdf": "BODY", "foundry": @data.stats.body.value },
+    { "pdf": "EMP", "foundry": @data.stats.emp.value },
+    { "pdf": "EMP MAX", "foundry": @data.stats.emp.max },
+
+    /* Skills // TODO: Fix these */
+    { "pdf": "Concentration Level" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Concentration")[0]?.data?.level ?? 'Failed' },
+    { "pdf": "Concentration Total" , "foundry": ""},
+
+    { "pdf": "Conceal/Reveal LVL" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Conceal/Reveal Object")[0]?.data?.level ?? 'Failed'},
+    { "pdf": "Conceal/Reveal Total" , "foundry": ""},
+
+    { "pdf": "LVLLip Reading INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Lip Reading")[0]?.data?.level ?? 'Failed'},
+    { "pdf": "Lip Reading Total" , "foundry": ""},
+
+
+    /* Armor */
+    { "pdf": "Head Armor", "foundry": @items.filter(item => item.type === "armor" && item.data.equipped === "equipped" && item.data.isHeadLocation)[0]?.name ?? 'Failed' },
+    { "pdf": "SPHead", "foundry": "" },
+    { "pdf": "PENALTYHead", "foundry": @items.filter(item => item.type === "armor" && item.data.equipped === "equipped" && item.data.isHeadLocation)[0]?.data?.penalty ?? 'Failed' },
+
+    { "pdf": "Body Armor", "foundry": @items.filter(item => item.type === "armor" && item.data.equipped === "equipped" && item.data.isBodyLocation)[0]?.name ?? 'Failed' },
+    { "pdf": "SPBody", "foundry": "" },
+    { "pdf": "PENALTYBody", "foundry": @items.filter(item => item.type === "armor" && item.data.equipped === "equipped" && item.data.isBodyLocation)[0]?.data?.penalty ?? 'Failed' },
+
+    { "pdf": "Shield", "foundry": @items.filter(item => item.type === "armor" && item.data.equipped === "equipped" && item.data.isShield)[0]?.name ?? 'Failed' },
+    { "pdf": "SPShield", "foundry": "" },
+    { "pdf": "PENALTYShield", "foundry": @items.filter(item => item.type === "armor" && item.data.equipped === "equipped" && item.data.isShield)[0]?.data?.penalty ?? 'Failed' },
+
+    /* // TODO: Weapons */
+
+    /***************************************************************************
+     * Page 2 *
+     **************************************************************************/
+    { "pdf": "Aliases", "foundry": @data.information.alias },
+    { "pdf": "Current IP", "foundry": @data.improvementPoints.value },
+    { "pdf": "Reputation", "foundry": @data.reputation.value },
+    { "pdf": "Reputation Events", "foundry": "" },
+
+    /* Lifepath */
+    { "pdf": "Cultural Origins", "foundry": @data.lifepath.culturalOrigin },
+    { "pdf": "Personality", "foundry": @data.lifepath.personality },
+    { "pdf": "Clothing Style", "foundry": @data.lifepath.clothingStyle },
+    { "pdf": "Hairstyle", "foundry": @data.lifepath.hairStyle },
+    { "pdf": "What Value Most", "foundry": @data.lifepath.valueMost },
+    { "pdf": "Feelings About People", "foundry": @data.lifepath.aboutPeople },
+    { "pdf": "Who Value Most", "foundry": @data.lifepath.valuedPerson },
+    { "pdf": "Valued Possession", "foundry": @data.lifepath.valuedPossession },
+    { "pdf": "Family Background", "foundry":  @data.lifepath.familyBackground },
+    { "pdf": "Childhood Env", "foundry":  @data.lifepath.childhoodEnvironment },
+    { "pdf": "Family Crisis", "foundry":  @data.lifepath.familyCrisis },
+    { "pdf": "Life Goals", "foundry":  @data.lifepath.lifeGoals },
+
+    { "pdf": "Friend 1", "foundry": "" },
+    { "pdf": "Friend 2", "foundry": "" },
+    { "pdf": "Friend 3", "foundry": "" },
+
+    { "pdf": "Love Affair 1", "foundry": "" },
+    { "pdf": "Love Affair 2", "foundry": "" },
+    { "pdf": "Love Affair 3", "foundry": "" },
+
+    /* Gear */
+    { "pdf": "Cash", "foundry": @data.wealth.value },
+
+    /* Lifestyle */
+    { "pdf": "FASHION", "foundry": @data.lifestyle.fashion.description },
+    { "pdf": "Housing", "foundry": @data.lifestyle.housing.description },
+    { "pdf": "Rent", "foundry": @data.lifestyle.housing.cost },
+    { "pdf": "Lifestyle", "foundry": @data.lifestyle.lifestyle.description },
+
+    /***************************************************************************
+     * Page 3 *
+     **************************************************************************/
+    { "pdf": "Audio Box", "foundry": @items.filter(item => item.type === "cyberware" && item.name === "Cyberaudio Suite")[0]?.data?.isInstalled ? 1 : 0},
+    { "pdf": "Link Box", "foundry": @items.filter(item => item.type === "cyberware" && item.name === "Neural Link")[0]?.data?.isInstalled ? 1 : 0},
+
+    /***************************************************************************
+     * Unimplemented (Not currently in Cyberpunk RED Core foundry) *
+     **************************************************************************/
+    /* Page 1 */
+    { "pdf": "ADDICTIONS", "foundry": "" },
+
+    /* Language Subskill */
+    { "pdf": "Language 2", "foundry": "" },
+    { "pdf": "LVL", "foundry": "" },
+    { "pdf": "Lang 2 Total", "foundry": "" },
+
+    { "pdf": "Language 3", "foundry": "" },
+    { "pdf": "LVL_2", "foundry": "" },
+    { "pdf": "Lang 3 Total", "foundry": "" },
+
+    /* Local Expert Subskill */
+    { "pdf": "Local Expert 2", "foundry": "" },
+    { "pdf": "LVL_3", "foundry": "" },
+    { "pdf": "Local Expert 2 Total", "foundry": "" },
+
+    { "pdf": "Local Expert 3", "foundry": "" },
+    { "pdf": "LVL_4", "foundry": "" },
+    { "pdf": "Local Expert 3 Total", "foundry": "" },
+
+    /* Science Subskill */
+    { "pdf": "Science 1", "foundry": "" },
+    { "pdf": "LVL_5", "foundry": "" },
+    { "pdf": "Science 1 Total", "foundry": "" },
+
+    { "pdf": "Science 2", "foundry": "" },
+    { "pdf": "LVL_6", "foundry": "" },
+    { "pdf": "Science 2 Total", "foundry": "" },
+
+    /* Play Instrument Subskill */
+    { "pdf": "Instrument 1", "foundry": "" },
+    { "pdf": "LVL_7", "foundry": "" },
+    { "pdf": "Play I 1 Total", "foundry": "" },
+
+    { "pdf": "Instrument 2", "foundry": "" },
+    { "pdf": "LVL_8", "foundry": "" },
+    { "pdf": "Play I 2 Total", "foundry": "" },
+
+    /* Page 2 */
+    { "pdf": "Total IP", "foundry": "" },
+
+    /* Enemies */
+    { "pdf": "Who 1", "foundry": "" },
+    { "pdf": "What Caused It", "foundry": "" },
+    { "pdf": "Throw At You 1", "foundry": "" },
+    { "pdf": "Happen 1", "foundry": "" },
+
+    { "pdf": "Who 2", "foundry": "" },
+    { "pdf": "What Caused It 2", "foundry": "" },
+    { "pdf": "Throw At You 2", "foundry": "" },
+    { "pdf": "Happen 2", "foundry": "" },
+
+    { "pdf": "Who 3", "foundry": "" },
+    { "pdf": "What Caused It 3", "foundry": "" },
+    { "pdf": "Throw At You 3", "foundry": "" },
+    { "pdf": "Happen 3", "foundry": "" },
+
+    { "pdf": "ROLE SPECIFIC LIFEPATH", "foundry": "" },
+
+    /* Page 3 */
+
+    { "pdf": "", "foundry": "" }
+]
