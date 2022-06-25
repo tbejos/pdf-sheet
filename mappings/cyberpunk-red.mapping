@@ -5,16 +5,16 @@
      **************************************************************************/
     { "pdf": "Handle", "foundry": @name },
     { "pdf": "Role", "foundry": @data.roleInfo.activeRole },
-    { "pdf": "Role Ability", "foundry": "" },
-    { "pdf": "Role Ability Rank", "foundry": "" },
+    { "pdf": "Role Ability", "foundry": @items.filter(item => item.type === "role" && item.name === @data.roleInfo.activeRole)[0]?.data?.data?.mainRoleAbility ?? '' },
+    { "pdf": "Role Ability Rank", "foundry": @items.filter(item => item.type === "role" && item.name === @data.roleInfo.activeRole)[0]?.data?.data?.rank ?? '' },
     { "pdf": "Notes", "foundry": @data.information.notes?.replace(/<\/?[^>]+(>|$)/g, "") }, /* Remove HTML tags from notes */
     { "pdf": "Current Humanity", "foundry": @data.derivedStats.humanity.value },
     { "pdf": "Max Humanity", "foundry": @data.derivedStats.humanity.max },
     { "pdf": "Current HP", "foundry": @data.derivedStats.hp.value },
     { "pdf": "Max HP", "foundry": @data.derivedStats.hp.max },
     { "pdf": "Seriously Wounded Threshhold", "foundry": @data.derivedStats.seriouslyWounded },
-    { "pdf": "Death Save", "foundry": "" },
-    { "pdf": "Critical Injuries", "foundry": "" },
+    { "pdf": "Death Save", "foundry": "" }, /* @data.derivedStats.deathSave.? */
+    { "pdf": "Critical Injuries", "foundry": @items.filter(item => item.type === "criticalInjury").map(crit => `${crit.name}`).join("\n") ?? '' },
 
     /* Stats */
     { "pdf": "INT", "foundry": @data.stats.int.value },
@@ -32,254 +32,260 @@
 
     /* Skills */
     /* Awareness Skills */
-    { "pdf": "Concentration Level" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Concentration")[0]?.data?.data?.level ?? '' },
-    { "pdf": "Concentration Total" , "foundry": ""},
+    { "pdf": "Concentration Level", "foundry": @items.filter(item => item.type === "skill" && item.name === "Concentration")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Concentration Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Concentration")[0]?.data?.data?.level ?? 0) + @data.stats.will.value },
 
-    { "pdf": "Conceal/Reveal LVL" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Conceal/Reveal Object")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Conceal/Reveal Total" , "foundry": ""},
+    { "pdf": "Conceal/Reveal LVL", "foundry": @items.filter(item => item.type === "skill" && item.name === "Conceal/Reveal Object")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Conceal/Reveal Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Conceal/Reveal Object")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
-    { "pdf": "LVLLip Reading INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Lip Reading")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Lip Reading Total" , "foundry": ""},
+    { "pdf": "LVLLip Reading INT", "foundry": @items.filter(item => item.type === "skill" && item.name === "Lip Reading")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Lip Reading Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Lip Reading")[0]?.data?.data?.level ?? 0) + @data.stats.int.value},
 
-    { "pdf": "LVLPerception INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Perception")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Perception Total" , "foundry": ""},
+    { "pdf": "LVLPerception INT", "foundry": @items.filter(item => item.type === "skill" && item.name === "Perception")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Perception Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Perception")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
-    { "pdf": "LVLTracking INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Tracking")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Tracking Total" , "foundry": ""},
+    { "pdf": "LVLTracking INT", "foundry": @items.filter(item => item.type === "skill" && item.name === "Tracking")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Tracking Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Tracking")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
     /* Body Skills */
-    { "pdf": "LVLAthletics DEX" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Athletics")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Athletics Total" , "foundry": ""},
+    { "pdf": "LVLAthletics DEX", "foundry": @items.filter(item => item.type === "skill" && item.name === "Athletics")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Athletics Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Athletics")[0]?.data?.data?.level ?? 0) + @data.stats.dex.value },
 
-    { "pdf": "LVLContortionist DEX" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Contortionist")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Contortionist Total" , "foundry": ""},
+    { "pdf": "LVLContortionist DEX", "foundry": @items.filter(item => item.type === "skill" && item.name === "Contortionist")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Contortionist Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Contortionist")[0]?.data?.data?.level ?? 0) + @data.stats.dex.value},
 
-    { "pdf": "LVLDance DEX" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Dance")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Dance Total" , "foundry": ""},
+    { "pdf": "LVLDance DEX", "foundry": @items.filter(item => item.type === "skill" && item.name === "Dance")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Dance Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Dance")[0]?.data?.data?.level ?? 0) + @data.stats.dex.value},
 
-    { "pdf": "LVLEndurance WILL" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Endurance")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Endurance Total" , "foundry": ""},
+    { "pdf": "LVLEndurance WILL", "foundry": @items.filter(item => item.type === "skill" && item.name === "Endurance")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Endurance Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Endurance")[0]?.data?.data?.level ?? 0) + @data.stats.will.value},
 
-    { "pdf": "LVLResist TortureDrugs WILL" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Resist Torture/Drugs")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Resist Total" , "foundry": ""},
+    { "pdf": "LVLResist TortureDrugs WILL", "foundry": @items.filter(item => item.type === "skill" && item.name === "Resist Torture/Drugs")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Resist Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Resist Torture/Drugs")[0]?.data?.data?.level ?? 0) + @data.stats.will.value},
 
-    { "pdf": "LVLStealth DEX" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Stealth")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Stealth Total" , "foundry": ""},
+    { "pdf": "LVLStealth DEX", "foundry": @items.filter(item => item.type === "skill" && item.name === "Stealth")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Stealth Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Stealth")[0]?.data?.data?.level ?? 0) + @data.stats.dex.value},
 
     /* Control Skills */
-    { "pdf": "LVLDrive Land Vehicle REF" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Drive Land Vehicle")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Drive Land Total" , "foundry": ""},
+    { "pdf": "LVLDrive Land Vehicle REF", "foundry": @items.filter(item => item.type === "skill" && item.name === "Drive Land Vehicle")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Drive Land Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Drive Land Vehicle")[0]?.data?.data?.level ?? 0) + @data.stats.ref.value },
 
-    { "pdf": "LVLPilor Air Vehicle x2 REF" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Pilot Air Vehicle")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Pilot Air Total" , "foundry": ""},
+    { "pdf": "LVLPilor Air Vehicle x2 REF", "foundry": @items.filter(item => item.type === "skill" && item.name === "Pilot Air Vehicle")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Pilot Air Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Pilot Air Vehicle")[0]?.data?.data?.level ?? 0) + @data.stats.ref.value },
 
-    { "pdf": "LVLPilot Sea Vehicle REF" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Pilot Sea Vehicle")[0]?.data?.data?.level ?? ''},
-    { "pdf": "" , "foundry": ""},
+    { "pdf": "LVLPilot Sea Vehicle REF", "foundry": @items.filter(item => item.type === "skill" && item.name === "Pilot Sea Vehicle")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "", "foundry": "" }, /* PDF Form links to wrong field */
 
-    { "pdf": "LVLRiding REF" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Riding")[0]?.data?.data?.level ?? ''},
-    { "pdf": "" , "foundry": ""},
+    { "pdf": "LVLRiding REF", "foundry": @items.filter(item => item.type === "skill" && item.name === "Riding")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "", "foundry": "" }, /* PDF Form links to wrong field */
 
     /* Education Skills */
-    { "pdf": "LVLAccounting INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Accounting")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Accounting Total" , "foundry": ""},
+    { "pdf": "LVLAccounting INT", "foundry": @items.filter(item => item.type === "skill" && item.name === "Accounting")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Accounting Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Accounting")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
-    { "pdf": "LVLAnimal Handling INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Animal Handling")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Animal Handling Total" , "foundry": ""},
+    { "pdf": "LVLAnimal Handling INT", "foundry": @items.filter(item => item.type === "skill" && item.name === "Animal Handling")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Animal Handling Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Animal Handling")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
-    { "pdf": "LVLBureaucracy INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Bureaucracy")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Bureaucracy Total" , "foundry": ""},
+    { "pdf": "LVLBureaucracy INT", "foundry": @items.filter(item => item.type === "skill" && item.name === "Bureaucracy")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Bureaucracy Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Bureaucracy")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
-    { "pdf": "LVLBusiness INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Business")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Business Total" , "foundry": ""},
+    { "pdf": "LVLBusiness INT", "foundry": @items.filter(item => item.type === "skill" && item.name === "Business")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Business Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Business")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
-    { "pdf": "LVLComposition INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Composition")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Composition Total" , "foundry": ""},
+    { "pdf": "LVLComposition INT", "foundry": @items.filter(item => item.type === "skill" && item.name === "Composition")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Composition Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Composition")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
-    { "pdf": "LVLCriminology INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Criminology")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Criminology Total" , "foundry": ""},
+    { "pdf": "LVLCriminology INT", "foundry": @items.filter(item => item.type === "skill" && item.name === "Criminology")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Criminology Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Criminology")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
-    { "pdf": "LVLCryptography INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Cryptography")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Cryptography Total" , "foundry": ""},
+    { "pdf": "LVLCryptography INT", "foundry": @items.filter(item => item.type === "skill" && item.name === "Cryptography")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Cryptography Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Cryptography")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
-    { "pdf": "LVLDeduction INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Deduction")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Deduction Total" , "foundry": ""},
+    { "pdf": "LVLDeduction INT", "foundry": @items.filter(item => item.type === "skill" && item.name === "Deduction")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Deduction Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Deduction")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
-    { "pdf": "LVLEducation INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Education")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Education Total" , "foundry": ""},
+    { "pdf": "LVLEducation INT", "foundry": @items.filter(item => item.type === "skill" && item.name === "Education")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Education Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Education")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
-    { "pdf": "Gamble" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Gamble")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Gamble Total" , "foundry": ""},
+    { "pdf": "Gamble", "foundry": @items.filter(item => item.type === "skill" && item.name === "Gamble")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Gamble Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Gamble")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
-    { "pdf": "LVLStreetslang" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Language (Streetslang)")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Lang Street Slang Total" , "foundry": ""},
+    { "pdf": "LVLStreetslang", "foundry": @items.filter(item => item.type === "skill" && item.name === "Language (Streetslang)")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Lang Street Slang Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Language (Streetslang)")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
-    { "pdf": "LVLLibrary Search INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Library Search")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Library Search Total" , "foundry": ""},
+    { "pdf": "LVLLibrary Search INT", "foundry": @items.filter(item => item.type === "skill" && item.name === "Library Search")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Library Search Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Library Search")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
-    { "pdf": "LVLYour Home" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Local Expert")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Local Expert 1 Total" , "foundry": ""},
+    { "pdf": "LVLYour Home", "foundry": @items.filter(item => item.type === "skill" && item.name === "Local Expert")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Local Expert 1 Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Local Expert")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
-    { "pdf": "LVLTactics INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Tactics")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Tactics Total" , "foundry": ""},
+    { "pdf": "LVL_5", "foundry": @items.filter(item => item.type === "skill" && item.name === "Science")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Science 1 Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Science")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
-    { "pdf": "LVLWilderness Survival INT" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Wilderness Survival")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Wilderness Survival Total" , "foundry": ""},
+    { "pdf": "LVLTactics INT", "foundry": @items.filter(item => item.type === "skill" && item.name === "Tactics")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Tactics Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Tactics")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
+
+    { "pdf": "LVLWilderness Survival INT", "foundry": @items.filter(item => item.type === "skill" && item.name === "Wilderness Survival")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Wilderness Survival Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Wilderness Survival")[0]?.data?.data?.level ?? 0) + @data.stats.int.value },
 
     /* Fighting Skills */
-    { "pdf": "LVLBrawling DEX" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Brawling")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Brawling Total" , "foundry": ""},
+    { "pdf": "LVLBrawling DEX", "foundry": @items.filter(item => item.type === "skill" && item.name === "Brawling")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Brawling Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Brawling")[0]?.data?.data?.level ?? 0) + @data.stats.dex.value },
 
-    { "pdf": "LVLEvasion DEX" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Evasion")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Evasion Total" , "foundry": ""},
+    { "pdf": "LVLEvasion DEX", "foundry": @items.filter(item => item.type === "skill" && item.name === "Evasion")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Evasion Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Evasion")[0]?.data?.data?.level ?? 0) + @data.stats.dex.value },
 
-    { "pdf": "LVLMartial Arts x2 DEX" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Martial Arts")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Martial Arts Total" , "foundry": ""},
+    { "pdf": "LVLMartial Arts x2 DEX", "foundry": @items.filter(item => item.type === "skill" && item.name === "Martial Arts")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Martial Arts Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Martial Arts")[0]?.data?.data?.level ?? 0) + @data.stats.dex.value },
 
-    { "pdf": "LVLMelee Weapon DEX" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Melee Weapon")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Melee Weapon Total" , "foundry": ""},
+    { "pdf": "LVLMelee Weapon DEX", "foundry": @items.filter(item => item.type === "skill" && item.name === "Melee Weapon")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Melee Weapon Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Melee Weapon")[0]?.data?.data?.level ?? 0) + @data.stats.dex.value },
 
     /* Performance Skills */
-    { "pdf": "LVLActing COOL" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Acting")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Acting Total" , "foundry": ""},
+    { "pdf": "LVLActing COOL", "foundry": @items.filter(item => item.type === "skill" && item.name === "Acting")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Acting Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Acting")[0]?.data?.data?.level ?? 0) + @data.stats.cool.value },
+
+    { "pdf": "LVL_7", "foundry": @items.filter(item => item.type === "skill" && item.name === "Play Instrument")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Play I 1 Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Play Instrument")[0]?.data?.data?.level ?? 0) + @data.stats.tech.value },
 
     /* Ranged Weapons Skills */
-    { "pdf": "LVLArchery REF" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Archery")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Archery Total" , "foundry": ""},
+    { "pdf": "LVLArchery REF", "foundry": @items.filter(item => item.type === "skill" && item.name === "Archery")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Archery Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Archery")[0]?.data?.data?.level ?? 0) + @data.stats.ref.value },
 
-    { "pdf": "LVLAutofire x2 REF" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Autofire")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Autofire Total" , "foundry": ""},
+    { "pdf": "LVLAutofire x2 REF", "foundry": @items.filter(item => item.type === "skill" && item.name === "Autofire")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Autofire Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Autofire")[0]?.data?.data?.level ?? 0) + @data.stats.ref.value },
 
-    { "pdf": "Handgun" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Handgun")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Handgun Total" , "foundry": ""},
+    { "pdf": "Handgun", "foundry": @items.filter(item => item.type === "skill" && item.name === "Handgun")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Handgun Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Handgun")[0]?.data?.data?.level ?? 0) + @data.stats.ref.value },
 
-    { "pdf": "LVLHeavy Weapons x2 REF" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Heavy Weapons")[0]?.data?.data?.level ?? ''},
-    { "pdf": "HW Total" , "foundry": ""},
+    { "pdf": "LVLHeavy Weapons x2 REF", "foundry": @items.filter(item => item.type === "skill" && item.name === "Heavy Weapons")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "HW Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Heavy Weapons")[0]?.data?.data?.level ?? 0) + @data.stats.ref.value },
 
-    { "pdf": "LVLShoulder Arms REF" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Shoulder Arms")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Shoulder Arms Total" , "foundry": ""},
+    { "pdf": "LVLShoulder Arms REF", "foundry": @items.filter(item => item.type === "skill" && item.name === "Shoulder Arms")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Shoulder Arms Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Shoulder Arms")[0]?.data?.data?.level ?? 0) + @data.stats.ref.value },
 
     /* Social Skills */
-    { "pdf": "LVLBribery COOL" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Bribery")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Bribery Total" , "foundry": ""},
+    { "pdf": "LVLBribery COOL", "foundry": @items.filter(item => item.type === "skill" && item.name === "Bribery")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Bribery Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Bribery")[0]?.data?.data?.level ?? 0) + @data.stats.cool.value },
 
-    { "pdf": "LVLConversation EMP" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Conversation")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Conversation Total" , "foundry": ""},
+    { "pdf": "LVLConversation EMP", "foundry": @items.filter(item => item.type === "skill" && item.name === "Conversation")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Conversation Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Conversation")[0]?.data?.data?.level ?? 0) + @data.stats.emp.value },
 
-    { "pdf": "LVLHuman Perception EMP" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Human Perception")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Human Perception Total" , "foundry": ""},
+    { "pdf": "LVLHuman Perception EMP", "foundry": @items.filter(item => item.type === "skill" && item.name === "Human Perception")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Human Perception Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Human Perception")[0]?.data?.data?.level ?? 0) + @data.stats.emp.value },
 
-    { "pdf": "LVLInterrogation COOL" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Interrogation")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Interrogation Total" , "foundry": ""},
+    { "pdf": "LVLInterrogation COOL", "foundry": @items.filter(item => item.type === "skill" && item.name === "Interrogation")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Interrogation Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Interrogation")[0]?.data?.data?.level ?? 0) + @data.stats.cool.value },
 
-    { "pdf": "LVLPersuasion COOL" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Persuasion")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Persuasion Total" , "foundry": ""},
+    { "pdf": "LVLPersuasion COOL", "foundry": @items.filter(item => item.type === "skill" && item.name === "Persuasion")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Persuasion Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Persuasion")[0]?.data?.data?.level ?? 0) + @data.stats.cool.value },
 
-    { "pdf": "LVLPersonal Grooming COOL" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Personal Grooming")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Personal Grooming Total" , "foundry": ""},
+    { "pdf": "LVLPersonal Grooming COOL", "foundry": @items.filter(item => item.type === "skill" && item.name === "Personal Grooming")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Personal Grooming Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Personal Grooming")[0]?.data?.data?.level ?? 0) + @data.stats.cool.value },
 
-    { "pdf": "LVLStreetwise COOL" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Streetwise")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Streetwise Total" , "foundry": ""},
+    { "pdf": "LVLStreetwise COOL", "foundry": @items.filter(item => item.type === "skill" && item.name === "Streetwise")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Streetwise Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Streetwise")[0]?.data?.data?.level ?? 0) + @data.stats.cool.value },
 
-    { "pdf": "LVLTrading COOL" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Trading")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Trading Total" , "foundry": ""},
+    { "pdf": "LVLTrading COOL", "foundry": @items.filter(item => item.type === "skill" && item.name === "Trading")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Trading Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Trading")[0]?.data?.data?.level ?? 0) + @data.stats.cool.value },
 
-    { "pdf": "LVLWardrobe  Style COOL" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Wardrobe & Style")[0]?.data?.data?.level ?? ''},
-    { "pdf": "W&S Total" , "foundry": ""},
+    { "pdf": "LVLWardrobe  Style COOL", "foundry": @items.filter(item => item.type === "skill" && item.name === "Wardrobe & Style")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "W&S Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Wardrobe & Style")[0]?.data?.data?.level ?? 0) + @data.stats.cool.value },
 
     /* Technique Skills */
-    { "pdf": "LVLAir Vehicle Tech TECH" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Air Vehicle Tech")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Air V Tech Total" , "foundry": ""},
+    { "pdf": "LVLAir Vehicle Tech TECH", "foundry": @items.filter(item => item.type === "skill" && item.name === "Air Vehicle Tech")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Air V Tech Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Air Vehicle Tech")[0]?.data?.data?.level ?? 0) + @data.stats.tech.value },
 
-    { "pdf": "LVLBasic Tech TECH" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Basic Tech")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Basic Tech Total" , "foundry": ""},
+    { "pdf": "LVLBasic Tech TECH", "foundry": @items.filter(item => item.type === "skill" && item.name === "Basic Tech")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Basic Tech Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Basic Tech")[0]?.data?.data?.level ?? 0) + @data.stats.tech.value },
 
-    { "pdf": "LVLCybertech TECH" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Cybertech")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Cybertech Total" , "foundry": ""},
+    { "pdf": "LVLCybertech TECH", "foundry": @items.filter(item => item.type === "skill" && item.name === "Cybertech")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Cybertech Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Cybertech")[0]?.data?.data?.level ?? 0) + @data.stats.tech.value },
 
-    { "pdf": "LVLDemolitions x2 TECH" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Demolitions")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Demolitions Total" , "foundry": ""},
+    { "pdf": "LVLDemolitions x2 TECH", "foundry": @items.filter(item => item.type === "skill" && item.name === "Demolitions")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Demolitions Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Demolitions")[0]?.data?.data?.level ?? 0) + @data.stats.tech.value },
 
-    { "pdf": "LVLElectronicsSecurity Tech x2 TECH" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Electronics/Security Tech")[0]?.data?.data?.level ?? ''},
-    { "pdf": "E/S Total" , "foundry": ""},
+    { "pdf": "LVLElectronicsSecurity Tech x2 TECH", "foundry": @items.filter(item => item.type === "skill" && item.name === "Electronics/Security Tech")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "E/S Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Electronics/Security Tech")[0]?.data?.data?.level ?? 0) + @data.stats.tech.value },
 
-    { "pdf": "LVLFirst Aid TECH" , "foundry": @items.filter(item => item.type === "skill" && item.name === "First Aid")[0]?.data?.data?.level ?? ''},
-    { "pdf": "First Aid Total" , "foundry": ""},
+    { "pdf": "LVLFirst Aid TECH", "foundry": @items.filter(item => item.type === "skill" && item.name === "First Aid")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "First Aid Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "First Aid")[0]?.data?.data?.level ?? 0) + @data.stats.tech.value },
 
-    { "pdf": "LVLForgery TECH" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Forgery")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Forgery Total" , "foundry": ""},
+    { "pdf": "LVLForgery TECH", "foundry": @items.filter(item => item.type === "skill" && item.name === "Forgery")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Forgery Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Forgery")[0]?.data?.data?.level ?? 0) + @data.stats.tech.value },
 
-    { "pdf": "LVLLand Vehicle Tech TECH" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Land Vehicle Tech")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Land Vehicle Tech Total" , "foundry": ""},
+    { "pdf": "LVLLand Vehicle Tech TECH", "foundry": @items.filter(item => item.type === "skill" && item.name === "Land Vehicle Tech")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Land Vehicle Tech Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Land Vehicle Tech")[0]?.data?.data?.level ?? 0) + @data.stats.tech.value },
 
-    { "pdf": "LVLPaintDrawSculpt TECH" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Paint/Draw/Sculpt")[0]?.data?.data?.level ?? ''},
-    { "pdf": "P/D/S Total" , "foundry": ""},
+    { "pdf": "LVLPaintDrawSculpt TECH", "foundry": @items.filter(item => item.type === "skill" && item.name === "Paint/Draw/Sculpt")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "P/D/S Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Paint/Draw/Sculpt")[0]?.data?.data?.level ?? 0) + @data.stats.tech.value },
 
-    { "pdf": "LVLParamedic x2 TECH" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Paramedic")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Paramedic Total" , "foundry": ""},
+    { "pdf": "LVLParamedic x2 TECH", "foundry": @items.filter(item => item.type === "skill" && item.name === "Paramedic")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Paramedic Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Paramedic")[0]?.data?.data?.level ?? 0) + @data.stats.tech.value },
 
-    { "pdf": "LVLPhotographyFilm TECH" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Photography/Film")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Photograph/Film Total" , "foundry": ""},
+    { "pdf": "LVLPhotographyFilm TECH", "foundry": @items.filter(item => item.type === "skill" && item.name === "Photography/Film")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Photograph/Film Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Photography/Film")[0]?.data?.data?.level ?? 0) + @data.stats.tech.value },
 
-    { "pdf": "LVLPick Lock TECH" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Pick Lock")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Pick Lock Total" , "foundry": ""},
+    { "pdf": "LVLPick Lock TECH", "foundry": @items.filter(item => item.type === "skill" && item.name === "Pick Lock")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Pick Lock Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Pick Lock")[0]?.data?.data?.level ?? 0) + @data.stats.tech.value },
 
-    { "pdf": "LVLPick Pocket TECH" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Pick Pocket")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Pick Pocket Total" , "foundry": ""},
+    { "pdf": "LVLPick Pocket TECH", "foundry": @items.filter(item => item.type === "skill" && item.name === "Pick Pocket")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Pick Pocket Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Pick Pocket")[0]?.data?.data?.level ?? 0) + @data.stats.tech.value },
 
-    { "pdf": "LVLSea Vehicle Tech TECH" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Sea Vehicle Tech")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Sea Vehicle Tech Total" , "foundry": ""},
+    { "pdf": "LVLSea Vehicle Tech TECH", "foundry": @items.filter(item => item.type === "skill" && item.name === "Sea Vehicle Tech")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Sea Vehicle Tech Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Sea Vehicle Tech")[0]?.data?.data?.level ?? 0) + @data.stats.tech.value },
 
-    { "pdf": "Weaponstech" , "foundry": @items.filter(item => item.type === "skill" && item.name === "Weaponstech")[0]?.data?.data?.level ?? ''},
-    { "pdf": "Weaponstech Total" , "foundry": ""},
+    { "pdf": "Weaponstech", "foundry": @items.filter(item => item.type === "skill" && item.name === "Weaponstech")[0]?.data?.data?.level ?? 0 },
+    { "pdf": "Weaponstech Total", "foundry": (@items.filter(item => item.type === "skill" && item.name === "Weaponstech")[0]?.data?.data?.level ?? 0) + @data.stats.tech.value },
 
     /* Armor */
-    { "pdf": "Head Armor", "foundry": @items.filter(item => item.type === "armor" && item.data.equipped === "equipped" && item.data.isHeadLocation)[0]?.name ?? 'Failed' },
-    { "pdf": "SPHead", "foundry": "" },
-    { "pdf": "PENALTYHead", "foundry": @items.filter(item => item.type === "armor" && item.data.equipped === "equipped" && item.data.isHeadLocation)[0]?.data?.penalty ?? 'Failed' },
+    { "pdf": "Head Armor", "foundry": @items.filter(item => item.type === "armor" && item.data.data.equipped === "equipped" && item.data.data.isHeadLocation)[0]?.name ?? '' },
+    { "pdf": "SPHead", "foundry": @items.filter(item => item.type === "armor" && item.data.data.equipped === "equipped" && item.data.data.isHeadLocation).map(headArmor => headArmor.data.data.headLocation.sp - headArmor.data.data.headLocation.ablation) ?? '' },
+    { "pdf": "PENALTYHead", "foundry": @items.filter(item => item.type === "armor" && item.data.data.equipped === "equipped" && item.data.data.isHeadLocation)[0]?.data?.data?.penalty ?? '' },
 
-    { "pdf": "Body Armor", "foundry": @items.filter(item => item.type === "armor" && item.data.equipped === "equipped" && item.data.isBodyLocation)[0]?.name ?? 'Failed' },
-    { "pdf": "SPBody", "foundry": "" },
-    { "pdf": "PENALTYBody", "foundry": @items.filter(item => item.type === "armor" && item.data.equipped === "equipped" && item.data.isBodyLocation)[0]?.data?.penalty ?? 'Failed' },
+    { "pdf": "Body Armor", "foundry": @items.filter(item => item.type === "armor" && item.data.data.equipped === "equipped" && item.data.data.isBodyLocation)[0]?.name ?? '' },
+    { "pdf": "SPBody", "foundry": @items.filter(item => item.type === "armor" && item.data.data.equipped === "equipped" && item.data.data.isBodyLocatiion).map(bodyArmor => bodyArmor.data.data.bodyLocation.sp - headArmor.data.data.bodyLocation.ablation) ?? '' },
+    { "pdf": "PENALTYBody", "foundry": @items.filter(item => item.type === "armor" && item.data.data.equipped === "equipped" && item.data.data.isBodyLocation)[0]?.data?.data?.penalty ?? '' },
 
-    { "pdf": "Shield", "foundry": @items.filter(item => item.type === "armor" && item.data.equipped === "equipped" && item.data.isShield)[0]?.name ?? 'Failed' },
-    { "pdf": "SPShield", "foundry": "" },
-    { "pdf": "PENALTYShield", "foundry": @items.filter(item => item.type === "armor" && item.data.equipped === "equipped" && item.data.isShield)[0]?.data?.penalty ?? 'Failed' },
+    { "pdf": "Shield", "foundry": @items.filter(item => item.type === "armor" && item.data.data.equipped === "equipped" && item.data.data.isShield)[0]?.name ?? '' },
+    { "pdf": "SPShield", "foundry": @items.filter(item => item.type === "armor" && item.data.data.equipped === "equipped" && item.data.data.isShield)[0]?.data?.data?.shieldHitPoints?.value ?? '' },
+    { "pdf": "PENALTYShield", "foundry": @items.filter(item => item.type === "armor" && item.data.data.equipped === "equipped" && item.data.data.isShield)[0]?.data?.data?.penalty ?? '' },
 
     /* Weapons */
-    { "pdf": "WEAPONRow1", "foundry": "" },
-    { "pdf": "DMGRow1", "foundry": "" },
-    { "pdf": "AMMORow1", "foundry": "" },
-    { "pdf": "ROFRow1", "foundry": "" },
+    { "pdf": "WEAPONRow1", "foundry": @items.filter(item => item.type === "weapon")[0]?.name ?? '' },
+    { "pdf": "DMGRow1", "foundry": @items.filter(item => item.type === "weapon")[0]?.data?.data?.damage ?? '' },
+    { "pdf": "AMMORow1", "foundry": @items.filter(item => item.type === "weapon")[0]?.data?.data?.magazine?.max ?? '' },
+    { "pdf": "ROFRow1", "foundry": @items.filter(item => item.type === "weapon")[0]?.data?.data?.rof ?? '' },
     { "pdf": "NOTESRow1", "foundry": "" },
 
-    { "pdf": "WEAPONRow2", "foundry": "" },
-    { "pdf": "DMGRow2", "foundry": "" },
-    { "pdf": "AMMORow2", "foundry": "" },
-    { "pdf": "ROFRow2", "foundry": "" },
+    { "pdf": "WEAPONRow2", "foundry": @items.filter(item => item.type === "weapon")[1]?.name ?? '' },
+    { "pdf": "DMGRow2", "foundry": @items.filter(item => item.type === "weapon")[1]?.data?.data?.damage ?? '' },
+    { "pdf": "AMMORow2", "foundry": @items.filter(item => item.type === "weapon")[1]?.data?.data?.magazine?.max ?? '' },
+    { "pdf": "ROFRow2", "foundry": @items.filter(item => item.type === "weapon")[1]?.data?.data?.rof ?? '' },
     { "pdf": "NOTESRow2", "foundry": "" },
 
-    { "pdf": "WEAPONRow3", "foundry": "" },
-    { "pdf": "DMGRow3", "foundry": "" },
-    { "pdf": "AMMORow3", "foundry": "" },
-    { "pdf": "ROFRow3", "foundry": "" },
+    { "pdf": "WEAPONRow3", "foundry": @items.filter(item => item.type === "weapon")[2]?.name ?? '' },
+    { "pdf": "DMGRow3", "foundry": @items.filter(item => item.type === "weapon")[2]?.data?.data?.damage ?? '' },
+    { "pdf": "AMMORow3", "foundry": @items.filter(item => item.type === "weapon")[2]?.data?.data?.magazine?.max ?? '' },
+    { "pdf": "ROFRow3", "foundry": @items.filter(item => item.type === "weapon")[2]?.data?.data?.rof ?? '' },
     { "pdf": "NOTESRow3", "foundry": "" },
 
-    { "pdf": "WEAPONRow4", "foundry": "" },
-    { "pdf": "DMGRow4", "foundry": "" },
-    { "pdf": "AMMORow4", "foundry": "" },
-    { "pdf": "ROFRow4", "foundry": "" },
+    { "pdf": "WEAPONRow4", "foundry": @items.filter(item => item.type === "weapon")[3]?.name ?? '' },
+    { "pdf": "DMGRow4", "foundry": @items.filter(item => item.type === "weapon")[3]?.data?.data?.damage ?? '' },
+    { "pdf": "AMMORow4", "foundry": @items.filter(item => item.type === "weapon")[3]?.data?.data?.magazine?.max ?? '' },
+    { "pdf": "ROFRow4", "foundry": @items.filter(item => item.type === "weapon")[3]?.data?.data?.rof ?? '' },
     { "pdf": "NOTESRow4", "foundry": "" },
 
-    { "pdf": "WEAPONRow5", "foundry": "" },
-    { "pdf": "DMGRow5", "foundry": "" },
-    { "pdf": "AMMORow5", "foundry": "" },
-    { "pdf": "ROFRow5", "foundry": "" },
+    { "pdf": "WEAPONRow5", "foundry": @items.filter(item => item.type === "weapon")[4]?.name ?? '' },
+    { "pdf": "DMGRow5", "foundry": @items.filter(item => item.type === "weapon")[4]?.data?.data?.damage ?? '' },
+    { "pdf": "AMMORow5", "foundry": @items.filter(item => item.type === "weapon")[4]?.data?.data?.magazine?.max ?? '' },
+    { "pdf": "ROFRow5", "foundry": @items.filter(item => item.type === "weapon")[4]?.data?.data?.rof ?? '' },
     { "pdf": "NOTESRow5", "foundry": "" },
 
-    { "pdf": "WEAPONRow6", "foundry": "" },
-    { "pdf": "DMGRow6", "foundry": "" },
-    { "pdf": "AMMORow6", "foundry": "" },
-    { "pdf": "ROFRow6", "foundry": "" },
+    { "pdf": "WEAPONRow6", "foundry": @items.filter(item => item.type === "weapon")[5]?.name ?? '' },
+    { "pdf": "DMGRow6", "foundry": @items.filter(item => item.type === "weapon")[5]?.data?.data?.damage ?? '' },
+    { "pdf": "AMMORow6", "foundry": @items.filter(item => item.type === "weapon")[5]?.data?.data?.magazine?.max ?? '' },
+    { "pdf": "ROFRow6", "foundry": @items.filter(item => item.type === "weapon")[5]?.data?.data?.rof ?? '' },
     { "pdf": "NOTESRow6", "foundry": "" },
 
     /***************************************************************************
@@ -362,7 +368,7 @@
      * Page 3 *
      **************************************************************************/
     /* // TODO: Use optionalIds[] to get sub cyberware */
-    { "pdf": "Audio Box", "foundry": @items.filter(item => item.type === "cyberware" && item.data.isInstalled && item.name === "Cyberaudio Suite")[0] ? 1 : 0},
+    { "pdf": "Audio Box", "foundry": @items.filter(item => item.type === "cyberware" && item.data.data.isInstalled && item.name === "Cyberaudio Suite")[0] ? 1 : 0 },
     { "pdf": "Audio 1", "foundry": "" },
     { "pdf": "A Data 1", "foundry": "" },
     { "pdf": "Audio 2", "foundry": "" },
@@ -370,7 +376,7 @@
     { "pdf": "Audio 3", "foundry": "" },
     { "pdf": "A Data 3", "foundry": "" },
 
-    { "pdf": "R Eye Box", "foundry": ""},
+    { "pdf": "R Eye Box", "foundry": @items.filter(item => item.type === "cyberware" && item.data.data.isInstalled && item.name === "Cybereye")[0] ? 1 : 0 },
     { "pdf": "R Eye 1", "foundry": "" },
     { "pdf": "RE Data 1", "foundry": "" },
     { "pdf": "R Eye 2", "foundry": "" },
@@ -378,7 +384,7 @@
     { "pdf": "R Eye 3", "foundry": "" },
     { "pdf": "RE Data 3", "foundry": "" },
 
-    { "pdf": "L Eye Box", "foundry": ""},
+    { "pdf": "L Eye Box", "foundry": @items.filter(item => item.type === "cyberware" && item.data.data.isInstalled && item.name === "Cybereye")[1] ? 1 : 0 },
     { "pdf": "L Eye 1", "foundry": "" },
     { "pdf": "LE Data 1", "foundry": "" },
     { "pdf": "L Eye 2", "foundry": "" },
@@ -386,7 +392,7 @@
     { "pdf": "L Eye 3", "foundry": "" },
     { "pdf": "LE Data 3", "foundry": "" },
 
-    { "pdf": "R Arm Box", "foundry": ""},
+    { "pdf": "R Arm Box", "foundry": @items.filter(item => item.type === "cyberware" && item.data.data.isInstalled && item.name === "Cyberarm")[0] ? 1 : 0 },
     { "pdf": "R Arm 1", "foundry": "" },
     { "pdf": "RArm Data 1", "foundry": "" },
     { "pdf": "R Arm 2", "foundry": "" },
@@ -396,7 +402,7 @@
     { "pdf": "R Arm 4", "foundry": "" },
     { "pdf": "RArm Data 4", "foundry": "" },
 
-    { "pdf": "L Arm Box", "foundry": ""},
+    { "pdf": "L Arm Box", "foundry": @items.filter(item => item.type === "cyberware" && item.data.data.isInstalled && item.name === "Cyberarm")[1] ? 1 : 0 },
     { "pdf": "L Arm 1", "foundry": "" },
     { "pdf": "LArm Data 1", "foundry": "" },
     { "pdf": "L Arm 2", "foundry": "" },
@@ -406,7 +412,7 @@
     { "pdf": "L Arm 4", "foundry": "" },
     { "pdf": "LArm Data 4", "foundry": "" },
 
-    { "pdf": "Link Box", "foundry": @items.filter(item => item.type === "cyberware" && item.data.isInstalled && item.name === "Neural Link")[0] ? 1 : 0},
+    { "pdf": "Link Box", "foundry": @items.filter(item => item.type === "cyberware" && item.data.data.isInstalled && item.name === "Neural Link")[0] ? 1 : 0 },
     { "pdf": "NLink 1", "foundry": "" },
     { "pdf": "NLink Data 1", "foundry": "" },
     { "pdf": "NLink 2", "foundry": "" },
@@ -418,7 +424,7 @@
     { "pdf": "NLink 5", "foundry": "" },
     { "pdf": "NLink Data 5", "foundry": "" },
 
-    { "pdf": "R Leg Box", "foundry": ""},
+    { "pdf": "R Leg Box", "foundry": @items.filter(item => item.type === "cyberware" && item.data.data.isInstalled && item.name === "Cyberleg")[0] ? 1 : 0 },
     { "pdf": "R Leg 1", "foundry": "" },
     { "pdf": "R Leg Data 1", "foundry": "" },
     { "pdf": "R Leg 2", "foundry": "" },
@@ -426,7 +432,7 @@
     { "pdf": "R Leg 3", "foundry": "" },
     { "pdf": "R Leg Data 3", "foundry": "" },
 
-    { "pdf": "L Leg Box", "foundry": ""},
+    { "pdf": "L Leg Box", "foundry": @items.filter(item => item.type === "cyberware" && item.data.data.isInstalled && item.name === "Cyberleg")[1] ? 1 : 0 },
     { "pdf": "L Leg 1", "foundry": "" },
     { "pdf": "L Leg Data 1", "foundry": "" },
     { "pdf": "L Leg 2", "foundry": "" },
@@ -521,8 +527,6 @@
 
     /* Science Subskill */
     { "pdf": "Science 1", "foundry": "" },
-    { "pdf": "LVL_5", "foundry": "" },
-    { "pdf": "Science 1 Total", "foundry": "" },
 
     { "pdf": "Science 2", "foundry": "" },
     { "pdf": "LVL_6", "foundry": "" },
@@ -530,8 +534,6 @@
 
     /* Play Instrument Subskill */
     { "pdf": "Instrument 1", "foundry": "" },
-    { "pdf": "LVL_7", "foundry": "" },
-    { "pdf": "Play I 1 Total", "foundry": "" },
 
     { "pdf": "Instrument 2", "foundry": "" },
     { "pdf": "LVL_8", "foundry": "" },
